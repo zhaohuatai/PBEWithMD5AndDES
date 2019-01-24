@@ -1,0 +1,52 @@
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>pebmd5des Test Suite</title>
+
+<script src="core.js"></script>
+<script src="cipher-core.js"></script>
+<script src="tripledes.js"></script>
+<script src="md5.js"></script>
+<script src="pebmd5des.js"></script>
+</head>
+<body >	
+<div>plainText: <input type="text" id="plainText" value="123456">  </div><br>
+<div>password_str: <input type="text" id="password_str" value="abcdefg">  </div><br>
+<div>static_salt_str: <input type="text" id="static_salt_str" value="12345678">  </div><br>
+<input type="button" value="计算" onclick="doPed()">
+<hr>
+
+<div>encryptedHex: <span id="encryptedHex"></span></div>
+<br>
+<div>decryptedASCII: <span id="decryptedASCII"></span></div>
+	
+<script>
+
+function doPed(){
+
+var password_str=document.getElementById('password_str').value;// "test";
+var data=document.getElementById('plainText').value;//"test";
+var static_salt=document.getElementById('static_salt_str').value;//"12345678";
+
+
+var encryptedHex=pebmd5des.encrypt(data,password_str,static_salt);
+
+console.log(encryptedHex);
+
+encryptedHex="a010a147dc0a2b59";
+//var b= pebmd5des.stringify(encryptedHex);
+
+var decryptedASCII=pebmd5des.decrypt( encryptedHex,  password_str, static_salt);
+
+document.getElementById('encryptedHex').innerHTML = encryptedHex;
+
+document.getElementById('decryptedASCII').innerHTML = decryptedASCII;
+
+}
+
+
+</script>
+		
+    </body>
+</html>
